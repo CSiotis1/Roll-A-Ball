@@ -37,4 +37,23 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(movement * speed);
 
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Pick Up")
+        {
+            Destroy(collision.gameObject);
+        }    
+        print(collision.gameObject.name);
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Pick Up")
+        {
+            Destroy(other.gameObject);
+        }
+    }
 }
+
