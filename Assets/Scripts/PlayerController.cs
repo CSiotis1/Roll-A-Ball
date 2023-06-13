@@ -11,12 +11,17 @@ public class PlayerController : MonoBehaviour
     public bool isGameOver = false;
     public Vector3 startingPos;
     private Rigidbody rb;
+    private int pickupCount;
 
     // Start is called before the first frame update
     void Start()
     {
         transform.position = startingPos;
         rb = GetComponent<Rigidbody>();
+        //Get the number of pickups in our scene
+        pickupCount = GameObject.FindGameObjectsWithTag("Pick Up").Length;
+        //Run the check pickups function
+        CheckPickups();
     }
 
     // Update is called once per frame
@@ -53,6 +58,20 @@ public class PlayerController : MonoBehaviour
         if(other.tag == "Pick Up")
         {
             Destroy(other.gameObject);
+            //Decrement the pickup count
+            pickupCount -= 1;
+            //Run the check pickups function
+            CheckPickups();
+           
+        }
+    }
+
+    void CheckPickups()
+    {
+        print("Pickups Left: " + pickupCount);
+        if (pickupCount == 0)
+        {
+            print("Good Work, Goober!");
         }
     }
 }
